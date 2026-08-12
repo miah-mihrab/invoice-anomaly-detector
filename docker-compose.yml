@@ -1,0 +1,15 @@
+services:
+
+  ml:
+    build:
+      context: .
+
+    container_name: invoice-anomaly-detector
+
+    volumes:
+      - .:/app
+
+    environment:
+      PYTHONUNBUFFERED: "1"
+
+    command: tail -f /dev/null
