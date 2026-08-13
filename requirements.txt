@@ -19,3 +19,7 @@ numpy
 # Data visualization
 matplotlib
 seaborn
+
+# Database
+sqlalchemy
+psycopg[binary]
