@@ -6,3 +6,16 @@ seaborn
 psycopg[binary]
 jupyter
 Faker
+
+
+# Jupyter environment
+jupyterlab
+ipykernel
+
+# Data analysis
+pandas
+numpy
+
+# Data visualization
+matplotlib
+seaborn
