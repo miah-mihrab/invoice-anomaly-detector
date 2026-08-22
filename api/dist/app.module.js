@@ -15,6 +15,7 @@ const invoice_item_entity_1 = require("./invoices/entities/invoice-item.entity")
 const supplier_entity_1 = require("./invoices/entities/supplier.entity");
 const customer_entity_1 = require("./invoices/entities/customer.entity");
 const product_entity_1 = require("./invoices/entities/product.entity");
+const invoices_module_1 = require("./invoices/invoices.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,6 +36,7 @@ exports.AppModule = AppModule = __decorate([
                     synchronize: false,
                 }),
             }),
+            invoices_module_1.InvoicesModule,
         ],
     })
 ], AppModule);

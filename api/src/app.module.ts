@@ -7,6 +7,7 @@ import { InvoiceItem } from './invoices/entities/invoice-item.entity';
 import { Supplier } from './invoices/entities/supplier.entity';
 import { Customer } from './invoices/entities/customer.entity';
 import { Product } from './invoices/entities/product.entity';
+import { InvoicesModule } from './invoices/invoices.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { Product } from './invoices/entities/product.entity';
         synchronize: false,
       }),
     }),
+    InvoicesModule,
   ],
 })
 export class AppModule {}
