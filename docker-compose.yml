@@ -33,7 +33,6 @@ services:
     container_name: invoice-anomaly-postgres
 
     environment:
-
       POSTGRES_DB: ${PG_DB}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASS}
@@ -52,6 +51,34 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  api:
+    build:
+      context: ./api
+
+    container_name: invoice-anomaly-api
+
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+
+    environment:
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_DB: ${PG_DB}
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PG_PASS}
+      ML_SERVICE_URL: http://ml:8000
+      PORT: 3000
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ml:
+        condition: service_started
 
 volumes:
   postgres_data:
