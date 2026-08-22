@@ -29,16 +29,11 @@ export class MlClientService {
     };
 
     try {
-      // @nestjs/axios wraps requests in an RxJS Observable — firstValueFrom
-      // converts that into a plain Promise, which is easier to just await.
       const response = await firstValueFrom(
         this.httpService.post<PredictResponse>('/predict', payload),
       );
       return response.data;
     } catch (error) {
-      // If the ML service is down or errors, don't crash the whole request —
-      // log it and let the caller decide how to handle a missing prediction.
-      // Invoice data should still be viewable even if scoring temporarily fails.
       this.logger.error(`Prediction failed for invoice ${invoice.id}`, error);
       return null;
     }

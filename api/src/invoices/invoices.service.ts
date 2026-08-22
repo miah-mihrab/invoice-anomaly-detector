@@ -14,8 +14,6 @@ export class InvoicesService {
     ) { }
 
     async findAll(page: number, limit: number) {
-        // TypeORM's findAndCount does the SELECT and the COUNT(*) in one call —
-        // convenient for building pagination metadata (total pages, etc.)
         const [invoices, total] = await this.invoiceRepository.findAndCount({
             relations: {
                 supplier: true,
@@ -23,7 +21,7 @@ export class InvoicesService {
                 items: {
                     product: true,
                 },
-            }, // joins these in, not just IDs
+            },
             order: { invoiceDate: 'DESC' },
             skip: (page - 1) * limit,
             take: limit,
@@ -65,8 +63,6 @@ export class InvoicesService {
 
 
     async getProductHistory(productId: string, excludeInvoiceId: string) {
-        // Raw query, since this is an aggregation (avg/min/max/count), not a
-        // simple entity fetch — TypeORM's query builder handles this cleanly.
         const stats = await this.invoiceRepository.manager
             .createQueryBuilder()
             .select('item.product_id', 'productId')
